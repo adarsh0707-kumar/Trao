@@ -24,6 +24,7 @@ out/
 # Build artifacts
 dist/
 build/
+*.tsbuildinfo
 kits.json
 output.json
 
