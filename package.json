@@ -18,6 +18,8 @@
     "build": "npm run build --workspaces"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.6.2",
     "concurrently": "^9.1.2",
     "dotenv": "^16.4.7",
