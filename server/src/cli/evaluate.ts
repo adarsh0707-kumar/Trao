@@ -114,7 +114,7 @@ async function main() {
 
   const outputData: BatchResultFile = {
     version: "1.0",
-    generated at: new Date().toISOString(),
+    generated_at: new Date().toISOString(),
     kits: results,
   };
 

@@ -42,7 +42,7 @@ const sortedFlashcards = useMemo(() => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [completedInSession, setCompletedInSession] = useState<Set<string>>(new Set());
 
-  const currentCard: Flashcard | undefined = sortedCards[currentIndex];
+  const currentCard: Flashcard | undefined = sortedFlashcards[currentIndex];
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -55,7 +55,7 @@ const sortedFlashcards = useMemo(() => {
     recordPracticeCard(kitId, currentCard.id, confidence).catch(console.error);
 
     // Advance to next card
-    if (currentIndex < sortedCards.length - 1) {
+    if (currentIndex < sortedFlashcards.length - 1) {
       setCurrentIndex((prev) => prev + 1);
       setIsFlipped(false);
     } else {
@@ -72,7 +72,7 @@ const sortedFlashcards = useMemo(() => {
       } else if (["1", "2", "3", "4", "5"].includes(e.key) && isFlipped) {
         handleRate(Number(e.key));
       } else if (e.key === "ArrowRight") {
-        if (currentIndex < sortedCards.length - 1) {
+        if (currentIndex < sortedFlashcards.length - 1) {
           setCurrentIndex((prev) => prev + 1);
           setIsFlipped(false);
         }
@@ -86,9 +86,9 @@ const sortedFlashcards = useMemo(() => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isFlipped, currentIndex, sortedCards.length, currentCard]);
+  }, [isFlipped, currentIndex, sortedFlashcards.length, currentCard]);
 
-  if (sortedCards.length === 0) {
+  if (sortedFlashcards.length === 0) {
     return (
       <div className="p-8 text-center bg-slate-900 border border-slate-800 rounded-2xl">
         <Layers className="w-8 h-8 text-slate-500 mx-auto mb-2" />
@@ -118,7 +118,7 @@ const sortedFlashcards = useMemo(() => {
 
         <div className="flex items-center gap-2 text-xs text-slate-400">
           <span className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">
-            Card {currentIndex + 1} of {sortedCards.length}
+            Card {currentIndex + 1} of {sortedFlashcards.length}
           </span>
         </div>
       </div>
@@ -233,12 +233,12 @@ const sortedFlashcards = useMemo(() => {
         <button
           type="button"
           onClick={() => {
-            if (currentIndex < sortedCards.length - 1) {
+            if (currentIndex < sortedFlashcards.length - 1) {
               setCurrentIndex((prev) => prev + 1);
               setIsFlipped(false);
             }
           }}
-          disabled={currentIndex === sortedCards.length - 1}
+          disabled={currentIndex === sortedFlashcards.length - 1}
           className="flex items-center gap-1 hover:text-slate-200 disabled:opacity-30"
         >
           Next <ChevronRight className="w-4 h-4" />

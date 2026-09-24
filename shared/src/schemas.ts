@@ -167,6 +167,6 @@ export const BatchCaseOutputSchema = z.object({
 
 export const BatchResultFileSchema = z.object({
   version: z.literal("1.0"),
-  generated at: z.string(),
+  generated_at: z.string(),
   kits: z.array(BatchCaseOutputSchema),
 });
