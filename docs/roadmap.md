@@ -1,5 +1,7 @@
 # Engineering Roadmap & Implementation Plan
+
 ## Project: Trao AI Interview Prep Kit
+
 **Specification:** `FS-AI-INTERVIEW-01`
 
 ---
@@ -42,12 +44,14 @@ gantt
 ## 2. Milestone Breakdown & Deliverables
 
 ### Phase 1: Project Setup & Shared Contracts
-- [x] Git repository initialization & `.gitignore`.
-- [x] Product Documentation (`PRD.md`, `requirements.md`, `api.md`, `architecture.md`, `roadmap.md`).
+
+- [X] Git repository initialization & `.gitignore`.
+- [X] Product Documentation (`PRD.md`, `requirements.md`, `api.md`, `architecture.md`, `roadmap.md`).
 - [ ] Root `package.json` with npm workspaces (`server`, `client`, `shared`).
 - [ ] Shared TypeScript interfaces and runtime Zod validation schemas for Appendix A and Appendix B.
 
 ### Phase 2: Core AI & Deterministic Pipeline Engine
+
 - [ ] **Resilient LLM Client (`server/src/pipeline/llm.ts`)**:
   - Multi-provider support (Gemini API / Groq / OpenAI compatible).
   - Rate-limit token bucket & exponential backoff with jitter for free tiers.
@@ -73,6 +77,7 @@ gantt
   - Enforces integer minutes for every day.
 
 ### Phase 3: Mandatory Batch Entry Point & Automated Tests
+
 - [ ] Implement `npm run evaluate -- --input <cases.json> --output <kits.json>`:
   - Consumes array of test cases from CLI arguments.
   - Invokes the identical core pipeline used by web application.
@@ -85,6 +90,7 @@ gantt
   - Appendix A schema validation tests.
 
 ### Phase 4: Express API & Real-Time Server
+
 - [ ] Express application bootstrap with TypeScript.
 - [ ] Minimal session/JWT authentication (scoped user access).
 - [ ] Server-Sent Events (SSE) progress broadcasting for web generation.
@@ -92,6 +98,7 @@ gantt
 - [ ] State-preserving section regeneration endpoint (`POST /api/kits/:id/regenerate-section`).
 
 ### Phase 5: Next.js Modern Frontend
+
 - [ ] Next.js App Router + Tailwind CSS setup.
 - [ ] Intake page: Textarea for JD, URL input, slider for days, multi-role JSON upload.
 - [ ] Live generation progress screen with step indicators and failure recovery.
@@ -107,6 +114,7 @@ gantt
   - Visual interactive day-by-day study roadmap.
 
 ### Phase 6: Creative Feature & Submission Finalization
+
 - [ ] **Creative Feature**:
   - **Interview Readiness Diagnostic**: Live score calculation based on card ratings and schedule progress.
   - **One-Click Printable Cheat Sheet**: Single-page printable review export.

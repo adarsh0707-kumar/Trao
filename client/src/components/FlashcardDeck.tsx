@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   RotateCcw,
   Sparkles,
@@ -24,11 +24,19 @@ interface FlashcardDeckProps {
 
 export function FlashcardDeck({ kitId, flashcards, onUpdateFlashcard }: FlashcardDeckProps) {
   // Sort cards by confidence ascending: unpracticed first, then least confident (adaptive queue)
-  const sortedCards = [...flashcards].sort((a, b) => {
+const sortedFlashcards = useMemo(() => {
+  return [...flashcards].sort((a, b) => {
+    // Unpracticed cards (confidence undefined) placed first
     const confA = a.confidence ?? 0;
     const confB = b.confidence ?? 0;
-    return confA - confB;
+    if (confA !== confB) return confA - confB;
+
+    // Tie-breaker: sort by lastPracticedAt ascending
+    const timeA = a.lastPracticedAt ? new Date(a.lastPracticedAt).getTime() : 0;
+    const timeB = b.lastPracticedAt ? new Date(b.lastPracticedAt).getTime() : 0;
+    return timeA - timeB;
   });
+}, [flashcards]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);

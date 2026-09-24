@@ -110,8 +110,11 @@ export function allocateSchedule(
         dayQuestionBuckets[i].push(activePool[i]);
       } else {
         // Review day: review hardest previously scheduled questions
-        const reviewQuestion = activePool[i % activePool.length];
-        dayQuestionBuckets[i].push(reviewQuestion);
+        const baseQ = activePool[i % activePool.length];
+        dayQuestionBuckets[i].push({
+          ...baseQ,
+          id: `${baseQ.id}_rev_d${i + 1}`,
+        });
       }
     }
   } else {

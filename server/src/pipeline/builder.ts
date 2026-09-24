@@ -15,35 +15,28 @@ import { allocateSchedule } from "./scheduler.js";
 export function mergeCategoryRegeneration(
   existingQuestions: Question[],
   incomingQuestions: Question[],
-  targetCategory: QuestionCategory
+  targetCategory: QuestionCategory,
 ): Question[] {
-  // 1. Keep questions in other categories completely intact
   const otherCategories = existingQuestions.filter(
-    (q) => q.category !== targetCategory
+    (q) => q.category !== targetCategory,
   );
 
-  // 2. In target category, identify protected questions:
-  //    - Pinned by user (isPinned === true)
-  //    - Edited by user (isEdited === true)
-  //    - Created by hand by user (origin === "user")
   const protectedQuestions = existingQuestions.filter(
     (q) =>
       q.category === targetCategory &&
-      (q.isPinned || q.isEdited || q.origin === "user")
+      (q.isPinned || q.isEdited || q.origin === "user"),
   );
 
-  // 3. Normalize incoming questions to avoid duplicate prompts with protected items
   const protectedPrompts = new Set(
-    protectedQuestions.map((q) => q.prompt.trim().toLowerCase())
+    protectedQuestions.map((q) => q.prompt.trim().toLowerCase()),
   );
 
-  // Filter out any incoming question that duplicates an already protected question
   const freshAdditions: Question[] = [];
   let nextIdCounter = existingQuestions.length + 1;
 
   for (const inc of incomingQuestions) {
+    // Check prompt collision against protected items
     if (!protectedPrompts.has(inc.prompt.trim().toLowerCase())) {
-      // Ensure incoming questions have unique sequential IDs
       freshAdditions.push({
         ...inc,
         id: `q${nextIdCounter++}`,
@@ -55,7 +48,21 @@ export function mergeCategoryRegeneration(
     }
   }
 
-  // 4. Return combined list: Other categories + Protected items + Fresh generated questions
+  // Fallback: If all new items collided, attach incoming with explicit variant tags
+  if (freshAdditions.length === 0 && incomingQuestions.length > 0) {
+    for (const inc of incomingQuestions) {
+      freshAdditions.push({
+        ...inc,
+        id: `q${nextIdCounter++}`,
+        prompt: `${inc.prompt} (Updated Focus)`,
+        category: targetCategory,
+        origin: "generated",
+        isPinned: false,
+        isEdited: false,
+      });
+    }
+  }
+
   return [...otherCategories, ...protectedQuestions, ...freshAdditions];
 }
 
