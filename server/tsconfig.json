@@ -10,7 +10,8 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@trao/shared": ["../shared/dist/index.d.ts"]
-    }
+    },
+    "rootDir": "./src"
   },
   "include": ["src/**/*"]
 }
