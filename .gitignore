@@ -24,6 +24,8 @@ out/
 # Build artifacts
 dist/
 build/
+kits.json
+output.json
 
 # Testing
 coverage/

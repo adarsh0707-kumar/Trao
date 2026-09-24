@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-01",
+    "jd": "Senior Full-Stack Engineer\n\nWe are looking for an experienced full-stack engineer to build modern web applications. You will be responsible for building responsive frontends in Next.js and Tailwind CSS, and scalable microservices in Node.js and TypeScript.\n\nRequired:\n- 4+ years of professional experience with TypeScript and Node.js\n- Deep knowledge of React and modern frontend state management\n- Hands-on experience with MongoDB or PostgreSQL database schema design\n- Strong experience writing automated unit and integration tests\n\nNice to have:\n- Experience with GraphQL APIs\n- Familiarity with Docker and AWS deployment",
+    "company_url": "https://example.com",
+    "days": 5
+  },
+  {
+    "id": "case-02",
+    "jd": "Backend Go Developer\nLooking for someone who knows Golang and concurrency.",
+    "company_url": "https://example.com",
+    "days": 3
+  },
+  {
+    "id": "case-03",
+    "jd": "Data Engineer\nMust know Python, Spark, and SQL.",
+    "company_url": "http://invalid-non-existent-domain-12345.test",
+    "days": 2
+  }
+]

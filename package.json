@@ -1,0 +1,35 @@
+{
+  "name": "trao-ai-interview-prep-kit",
+  "version": "1.0.0",
+  "description": "The AI Interview Prep Kit - Trao Engineering Assessment",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "evaluate": "tsx server/src/cli/evaluate.ts",
+    "dev:server": "npm --workspace=server run dev",
+    "dev:client": "npm --workspace=client run dev",
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm run dev:server\" \"npm run dev:client\"",
+    "test": "npm --workspace=server test",
+    "build": "npm run build --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  },
+  "keywords": [
+    "trao",
+    "interview-prep",
+    "ai",
+    "fullstack",
+    "assessment"
+  ],
+  "author": "adarsh0707-kumar <adarshku123456789@gmail.com>",
+  "license": "MIT"
+}
