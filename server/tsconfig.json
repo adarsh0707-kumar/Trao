@@ -11,7 +11,8 @@
     "paths": {
       "@trao/shared": ["../shared/dist/index.d.ts"]
     },
-    "rootDir": "./src"
+    "rootDir": "./src",
+    `"types":["node"]`
   },
   "include": ["src/**/*"]
 }
